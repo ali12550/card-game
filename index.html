@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compress PDF Online - 100% Free & Secure | TheBestPDF Compressor</title>
+  <meta name="description" content="Compress your PDF files locally and securely in your browser. Choose between High, Medium, or Low compression levels without uploading your files.">
+  
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Libraries (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Ambient background glow blobs -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="app-container">
+    <!-- Navbar / Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <i data-lucide="file-down" class="logo-icon"></i>
+        <span class="logo-text">TheBest<span class="highlight">PDF</span></span>
+      </div>
+      <div class="badge-private">
+        <i data-lucide="shield-check" class="badge-icon"></i>
+        <span>100% Local & Private</span>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- SCREEN 1: Upload Screen -->
+      <section id="screen-upload" class="screen active">
+        <div class="hero-section">
+          <h1>Compress PDF file</h1>
+          <p class="subtitle">Reduce the size of your PDF documents while keeping the best quality. Done completely offline on your device.</p>
+        </div>
+
+        <div class="upload-dropzone" id="dropzone">
+          <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+          <div class="dropzone-content">
+            <div class="icon-circle">
+              <i data-lucide="upload-cloud" class="upload-icon"></i>
+            </div>
+            <h3>Drag & Drop your PDF here</h3>
+            <p class="upload-hint">or click to browse from your device</p>
+            <div class="file-limits">Supports files up to 150MB</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: Compression Settings Screen -->
+      <section id="screen-settings" class="screen">
+        <div class="page-title">
+          <button id="btn-back-to-upload" class="btn-icon-back">
+            <i data-lucide="arrow-left"></i>
+          </button>
+          <h2>Compression Options</h2>
+        </div>
+
+        <!-- Selected File Metadata Card -->
+        <div class="file-info-card">
+          <div class="file-icon-box">
+            <i data-lucide="file-text" class="file-card-icon"></i>
+          </div>
+          <div class="file-details">
+            <h4 id="info-file-name" class="file-name">document.pdf</h4>
+            <div class="file-meta">
+              <span id="info-file-size" class="file-meta-item">4.2 MB</span>
+              <span class="dot">•</span>
+              <span id="info-file-pages" class="file-meta-item">12 pages</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Option 1: Extreme -->
+          <div class="option-card" data-compression="high">
+            <div class="option-header">
+              <div class="option-badge accent-high">High Compression</div>
+              <div class="option-radio"><div class="radio-inner"></div></div>
+            </div>
+            <div class="option-body">
+              <h3>Extreme Compression</h3>
+              <p>Maximum size reduction, lower resolution. Best for emailing or quick sharing on slow connections.</p>
+              <div class="quality-rating">
+                <span>Quality:</span>
+                <span class="rating-stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star"></i>
+                  <i data-lucide="star"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Option 2: Recommended -->
+          <div class="option-card selected" data-compression="medium">
+            <div class="option-header">
+              <div class="option-badge accent-medium">Recommended</div>
+              <div class="option-radio"><div class="radio-inner"></div></div>
+            </div>
+            <div class="option-body">
+              <h3>Medium Compression</h3>
+              <p>Balanced image quality and size reduction. Best for digital reading, uploads, and standard use.</p>
+              <div class="quality-rating">
+                <span>Quality:</span>
+                <span class="rating-stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Option 3: Low -->
+          <div class="option-card" data-compression="low">
+            <div class="option-header">
+              <div class="option-badge accent-low">Low Compression</div>
+              <div class="option-radio"><div class="radio-inner"></div></div>
+            </div>
+            <div class="option-body">
+              <h3>High Quality</h3>
+              <p>High image resolution, minimal size reduction. Best if you need crisp images and professional prints.</p>
+              <div class="quality-rating">
+                <span>Quality:</span>
+                <span class="rating-stars">
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                  <i data-lucide="star" class="star-filled"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <button id="btn-start-compress" class="btn btn-primary">
+            <span>Compress PDF</span>
+            <i data-lucide="zap"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: Compression Progress Screen -->
+      <section id="screen-progress" class="screen">
+        <div class="progress-container">
+          <div class="progress-radial">
+            <svg class="radial-svg" viewBox="0 0 120 120">
+              <circle class="radial-bg" cx="60" cy="60" r="50"></circle>
+              <circle class="radial-bar" id="progress-circle-bar" cx="60" cy="60" r="50"></circle>
+            </svg>
+            <div class="radial-content">
+              <span id="progress-percent" class="percent-text">0%</span>
+              <span class="percent-label">Optimizing</span>
+            </div>
+          </div>
+
+          <h3 id="progress-status-title">Compressing document...</h3>
+          <p id="progress-status-desc" class="progress-desc">Initializing compression engine</p>
+
+          <!-- Compression Checklist Steps -->
+          <div class="progress-checklist">
+            <div class="checklist-item" id="step-load">
+              <i data-lucide="circle-dashed" class="step-icon spinner"></i>
+              <span>Loading document structure</span>
+            </div>
+            <div class="checklist-item" id="step-process">
+              <i data-lucide="circle" class="step-icon text-muted"></i>
+              <span>Downscaling and compressing pages</span>
+            </div>
+            <div class="checklist-item" id="step-assemble">
+              <i data-lucide="circle" class="step-icon text-muted"></i>
+              <span>Rebuilding and packing PDF</span>
+            </div>
+          </div>
+
+          <button id="btn-cancel-compress" class="btn btn-secondary">
+            <span>Cancel Compression</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 4: Success Screen -->
+      <section id="screen-success" class="screen">
+        <div class="success-header">
+          <div class="success-icon-badge">
+            <i data-lucide="sparkles" class="sparkle-icon"></i>
+            <i data-lucide="check" class="success-check-icon"></i>
+          </div>
+          <h2>PDF Successfully Compressed!</h2>
+          <p class="subtitle">Your file has been optimized locally. It is now ready for download.</p>
+        </div>
+
+        <!-- Comparative Size Board -->
+        <div class="comparison-board">
+          <div class="board-column">
+            <span class="board-label">Original Size</span>
+            <div class="board-value text-muted" id="success-orig-size">5.40 MB</div>
+          </div>
+          <div class="board-divider">
+            <i data-lucide="arrow-right"></i>
+          </div>
+          <div class="board-column">
+            <span class="board-label">Compressed Size</span>
+            <div class="board-value text-success" id="success-comp-size">1.35 MB</div>
+          </div>
+          <div class="savings-card">
+            <div class="savings-percent" id="success-percent-saved">-75%</div>
+            <div class="savings-label">size reduction</div>
+          </div>
+        </div>
+
+        <div class="success-actions">
+          <button id="btn-download" class="btn btn-primary btn-large">
+            <i data-lucide="download"></i>
+            <span>Download Compressed PDF</span>
+          </button>
+          <button id="btn-reset" class="btn btn-secondary">
+            <i data-lucide="refresh-cw"></i>
+            <span>Compress Another File</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-privacy">
+        <i data-lucide="shield-check" class="privacy-icon"></i>
+        <span><strong>100% Secure:</strong> Files are compressed strictly offline on your computer. They are never sent to a server.</span>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2026 TheBestPDF. All rights reserved.
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
